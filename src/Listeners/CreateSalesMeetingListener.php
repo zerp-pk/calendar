@@ -2,7 +2,7 @@
 
 namespace Zerp\Calendar\Listeners;
 
-use Workdo\Sales\Events\CreateSalesMeeting;
+use Zerp\Sales\Events\CreateSalesMeeting;
 use Zerp\Calendar\Models\CalenderUtility;
 
 class CreateSalesMeetingListener

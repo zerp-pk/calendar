@@ -2,7 +2,7 @@
 
 namespace Zerp\Calendar\Listeners;
 
-use Workdo\TeamWorkload\Events\CreateTeamWorkloadHoliday;
+use Zerp\TeamWorkload\Events\CreateTeamWorkloadHoliday;
 use Zerp\Calendar\Models\CalenderUtility;
 
 class CreateTeamWorkloadHolidayListener

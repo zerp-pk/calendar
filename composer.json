@@ -1,6 +1,6 @@
 {
     "name": "zerp/calendar",
-    "description": "Description for calendar package",
+    "description": "Calendar and scheduling module for the Zerp ERP platform",
     "type": "library",
     "license": "MIT",
     "require": {},

@@ -3,7 +3,7 @@
 namespace Zerp\Calendar\Listeners;
 
 use Zerp\Calendar\Models\CalenderUtility;
-use Workdo\HospitalManagement\Events\UpdateHospitalAppointmentStatus;
+use Zerp\HospitalManagement\Events\UpdateHospitalAppointmentStatus;
 
 class CreateHospitalAppointmentListener
 {

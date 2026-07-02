@@ -2,7 +2,7 @@
 
 namespace Zerp\Calendar\Listeners;
 
-use Workdo\ToDo\Events\CreateToDo;
+use Zerp\ToDo\Events\CreateToDo;
 use Zerp\Calendar\Models\CalenderUtility;
 
 class CreateToDoListener

@@ -2,7 +2,7 @@
 
 namespace Zerp\Calendar\Listeners;
 
-use Workdo\School\Events\CreateEvent;
+use Zerp\School\Events\CreateEvent;
 use Zerp\Calendar\Models\CalenderUtility;
 
 class CreateSchoolEventListener

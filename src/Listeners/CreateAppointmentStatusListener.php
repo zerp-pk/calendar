@@ -2,7 +2,7 @@
 
 namespace Zerp\Calendar\Listeners;
 
-use Workdo\Appointment\Events\AppointmentStatus;
+use Zerp\Appointment\Events\AppointmentStatus;
 use Zerp\Calendar\Models\CalenderUtility;
 
 class CreateAppointmentStatusListener

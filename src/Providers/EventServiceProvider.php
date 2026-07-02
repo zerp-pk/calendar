@@ -11,6 +11,7 @@ use Zerp\Lead\Events\CreateLeadTask;
 use Zerp\CMMS\Events\CreateWorkOrder;
 use Zerp\Contract\Events\CreateContract;
 use Zerp\GoogleMeet\Events\CreateGoogleMeeting;
+use Zerp\Jitsi\Events\CreateJitsiMeeting;
 use Zerp\HospitalManagement\Events\UpdateHospitalAppointmentStatus;
 use Zerp\Sales\Events\CreateSalesCall;
 use Zerp\ZoomMeeting\Events\CreateZoomMeeting;
@@ -31,6 +32,7 @@ use Zerp\Calendar\Listeners\CreateWorkorderLis;
 use Zerp\Calendar\Listeners\CreateAppointmentStatusListener;
 use Zerp\Calendar\Listeners\CreateContractListener;
 use Zerp\Calendar\Listeners\CreateGoogleMeetingListener;
+use Zerp\Calendar\Listeners\CreateJitsiMeetingListener;
 use Zerp\Calendar\Listeners\CreateHospitalAppointmentListener;
 use Zerp\Calendar\Listeners\CreateSalesCallListener;
 use Zerp\Calendar\Listeners\CreateZoomMeetingListener;
@@ -74,6 +76,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CreateGoogleMeeting::class => [
             CreateGoogleMeetingListener::class,
+        ],
+        CreateJitsiMeeting::class => [
+            CreateJitsiMeetingListener::class,
         ],
         UpdateHospitalAppointmentStatus::class => [
             CreateHospitalAppointmentListener::class,

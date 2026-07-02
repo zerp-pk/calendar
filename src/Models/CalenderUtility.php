@@ -85,7 +85,7 @@ class CalenderUtility extends Model
             return 1;
         } elseif ($type == 'deal_task' || $type == 'lead_task' || $type == 'rotas' || $type == 'projecttask' || $type == 'work_order' || $type == 'todo' || $type == 'hearing_date') {
             return 2;
-        } elseif ($type == 'event' || $type == 'google_meet' || $type == 'interview_schedule' || $type == 'meeting' || $type == 'zoom_meeting' || $type == 'vcard_appointment' || $type == 'procurement_interview_schedule' || $type == 'school_event') {
+        } elseif ($type == 'event' || $type == 'google_meet' || $type == 'jitsi_meeting' || $type == 'interview_schedule' || $type == 'meeting' || $type == 'zoom_meeting' || $type == 'vcard_appointment' || $type == 'procurement_interview_schedule' || $type == 'school_event') {
             return 3;
         } elseif ($type == 'due_invoice' || $type == 'sales_invoice' || $type == 'purchase_invoice' || $type == 'contract_end') {
             return 4;

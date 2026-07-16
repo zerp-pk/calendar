@@ -13,13 +13,13 @@ Calendar module for the [Zerp](https://github.com/zerp-pk) ERP platform. Calenda
 composer require zerp/calendar
 ```
 
-The package auto-registers via Laravel's package discovery — no manual service provider registration needed.
+The package auto-registers via Laravel's package discovery - no manual service provider registration needed.
 
 ## What it provides
 
-- `Zerp\Calendar\Providers\CalendarServiceProvider` — boots this module's routes, migrations, and settings
+- `Zerp\Calendar\Providers\CalendarServiceProvider` - boots this module's routes, migrations, and settings
 - Frontend pages/components under `src/Resources/js`
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).

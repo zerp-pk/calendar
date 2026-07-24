@@ -48,7 +48,11 @@ class SettingsApiController extends Controller
                 return $this->errorResponse(__('Permission denied'), null, 403);
             }
 
-            $settings = $request->input('settings', []);
+            // Only ever write the Google Calendar keys. setSetting takes any
+            // key, so iterating the raw request would let a client overwrite
+            // arbitrary company settings (tokens, unrelated config).
+            $allowed = ['google_calendar_json_file', 'google_calendar_id', 'google_calendar_enable'];
+            $settings = array_intersect_key($request->input('settings', []), array_flip($allowed));
 
             if ($request->hasFile('json_file')) {
                 $settings['google_calendar_json_file'] = file_get_contents($request->file('json_file')->getRealPath());

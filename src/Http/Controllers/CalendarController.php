@@ -32,7 +32,35 @@ class CalendarController extends Controller
 {
     public function index(Request $request)
     {
-        if (Auth::user()->can('manage-calendar')) {
+        if (! Auth::user()->can('manage-calendar')) {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+
+        $data = $this->collectCalendarData($request);
+
+        if ($data['googleError']) {
+            return redirect()->back()->with('error', $data['googleError']);
+        }
+
+        return Inertia::render('Calendar/Calendar/Index', [
+            'events' => $data['events'],
+            'filters' => [
+                'calendar_type' => $data['calendarType'],
+                'module_filter' => $data['moduleFilter'],
+            ],
+            'availableFilters' => $data['availableFilters'],
+            'hasGoogleCalendarConfig' => $data['hasGoogleCalendarConfig'],
+        ]);
+    }
+
+    /**
+     * Aggregate calendar events across the active modules for the current
+     * company. Shared by the web index() and the REST API so both feeds stay
+     * identical. A google fetch failure is reported via 'googleError' rather
+     * than an early redirect, so each caller surfaces it in its own way.
+     */
+    public function collectCalendarData(Request $request): array
+    {
             $calendarType = $request->get('calendar_type', 'local');
             $moduleFilter = $request->get('module_filter', 'all');
 
@@ -119,12 +147,13 @@ class CalendarController extends Controller
 
             $events = [];
             $created_by = creatorId();
+            $googleError = null;
 
             if ($calendarType == 'google') {
                 try {
                     $googleEvents = CalenderUtility::getCalendarData('google', $created_by);
                     if (isset($googleEvents['error'])) {
-                        return redirect()->back()->with('error', $googleEvents['error']);
+                        $googleError = $googleEvents['error'];
                     } else {
                         // Filter Google Calendar events based on moduleFilter
                         if ($moduleFilter != 'all') {
@@ -138,7 +167,7 @@ class CalendarController extends Controller
                         $events = $googleEvents;
                     }
                 } catch (\Exception $e) {
-                    return redirect()->back()->with('error', 'Failed to fetch Google Calendar events');
+                    $googleError = 'Failed to fetch Google Calendar events';
                 }
             }
 
@@ -589,17 +618,13 @@ class CalendarController extends Controller
 
             $hasGoogleCalendarConfig = !empty($jsonFile) && !empty($calendarId) && $calendarEnabled === 'on';
 
-            return Inertia::render('Calendar/Calendar/Index', [
+            return [
                 'events' => $events,
-                'filters' => [
-                    'calendar_type' => $calendarType,
-                    'module_filter' => $moduleFilter,
-                ],
                 'availableFilters' => $availableFilters,
+                'calendarType' => $calendarType,
+                'moduleFilter' => $moduleFilter,
                 'hasGoogleCalendarConfig' => $hasGoogleCalendarConfig,
-            ]);
-        } else {
-            return redirect()->back()->with('error', __('Permission denied.'));
-        }
+                'googleError' => $googleError,
+            ];
     }
 }
